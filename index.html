@@ -38,7 +38,7 @@
         
 .header {
     background-color: var(--secondary-bg);
-    padding: 2.3rem;
+    padding: 1.7rem;
     border-bottom: 1px solid var(--border-color);
     position: relative;
     display: flex;
@@ -61,9 +61,9 @@
     background-color: var(--accent-color);
     color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -81,12 +81,24 @@
         
         .app-title {
             font-family: "Audiowide", sans-serif;
-            font-size: 2.2rem;
+            font-size: 1.7rem;
             font-weight: 800;
             -webkit-text-stroke: 0.1px rgb(209, 169, 237);
             color: var(--accent-color);
         }
-
+        .pill.light-grey {
+  display: inline-block;
+  background-color: #e0e0e0; /* Light grey tone */
+  color: #333;              /* Darker text for contrast */
+  font-size: 0.45rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
       
 
         
@@ -139,9 +151,9 @@
             border: 1px solid var(--border-color);
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-size: 1.2rem;
+            font-size: 0.8rem;
             resize: none;
-            min-height: 2.5rem;
+            min-height: 2rem;
             max-height: 150px;
         }
         
@@ -151,14 +163,14 @@
         }
         
         #send-button {
-            padding: 0.75rem 2.2rem;
+            padding: 0.45rem 1.5rem;
             background-color: var(--accent-color);
             color: white;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
             font-weight: 600;
-            font-size: 1.3rem;
+            font-size: 0.8rem;
             transition: background-color 0.2s;
         }
         
@@ -269,13 +281,13 @@
         }
         
         .welcome-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--accent-color);
             margin-bottom: 1rem;
         }
         
         .welcome-subtitle {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 2rem;
             color: #aaa;
         }
@@ -286,7 +298,7 @@
             gap: 0.75rem;
             width: 100%;
             max-width: 600px;
-            font-size: x-large;
+            font-size: large;
         }
         
         .sample-question {
@@ -310,7 +322,10 @@
     <div class="header">
         <div class="logo">
             <div class="logo-icon"></div>
-            <div class="app-title">VESTORA</div>
+            <div class="app-title">VESTORA
+                <span class="pill light-grey">Pre-Alpha</span>
+            </div>
+            
         </div>
         <button class="new-chat-button" onclick="location.reload()">New Chat</button>
     </div>
