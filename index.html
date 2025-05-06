@@ -6,8 +6,9 @@
     <title>Investment Advisor</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
         :root {
@@ -19,6 +20,7 @@
             --border-color: #3b3b3b;
             --message-user-bg: #272727;
             --message-bot-bg: #272727;
+            --sidebar-width: 280px;
         }
         
         * {
@@ -32,51 +34,172 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
-            flex-direction: column;
             height: 100vh;
+            overflow: hidden;
         }
         
-.header {
-    background-color: var(--secondary-bg);
-    padding: 1.7rem;
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Ensures logo is centered */
-}
-
-.logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.new-chat-button {
-    position: absolute;
-    right: 1rem;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 0.3rem 0.7rem;
-    border-radius: 0.5rem;
-    font-size: 0.7rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.new-chat-button:hover {
-    background-color: var(--accent-hover);
-}
-
+        /* Sidebar styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
         
-        .logo-icon {
-            color: var(--accent-color);
-            font-size: 2.5rem;
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .new-chat-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+        
+        .new-chat-btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .chat-history-title {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .chat-item {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+        .chat-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .chat-item.active {
+            background-color: rgba(147, 112, 219, 0.2);
+        }
+        
+        .chat-icon {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .user-name {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .logout-btn {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            margin-left: auto;
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn:hover {
+            color: var(--text-color);
+        }
+        
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .app-title {
@@ -86,21 +209,20 @@
             -webkit-text-stroke: 0.1px rgb(209, 169, 237);
             color: var(--accent-color);
         }
+        
         .pill.light-grey {
-  display: inline-block;
-  background-color: #e0e0e0; /* Light grey tone */
-  color: #333;              /* Darker text for contrast */
-  font-size: 0.45rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-  margin-left: 8px;
-  vertical-align: middle;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-      
-
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #333;
+            font-size: 0.45rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-left: 8px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         
         .chat-container {
             flex: 1;
@@ -135,8 +257,7 @@
         
         .input-area {
             padding: 1rem;
-            background-color: var(--secondary-bg);
-            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-color);
         }
         
         .input-container {
@@ -314,55 +435,118 @@
             background-color: var(--message-user-bg);
             border-color: var(--accent-color);
         }
- 
-
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">
-            <div class="logo-icon"></div>
-            <div class="app-title">VESTORA
-                <span class="pill light-grey">Pre-Alpha</span>
-            </div>
-            
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn" onclick="startNewChat()">
+                <i class="fas fa-plus"></i>
+                New Chat
+            </button>
         </div>
-        <button class="new-chat-button" onclick="location.reload()">New Chat</button>
-    </div>
-    
-    <div class="chat-container" id="chat-container">
-        <div class="welcome-container" id="welcome-screen">
-            <h1 class="welcome-title">Hi, I'm Vestora.</h1>
-            <p class="welcome-subtitle">Your AI-powered investment guide—smart, reliable, and always here for you.</p>
-            
-            
-            <div class="sample-questions">
-                <div class="sample-question" onclick="selectSampleQuestion(this)">
-                    What is dollar-cost averaging?
+        <div class="sidebar-content">
+            <div class="chat-history-title">Last 7 Days</div>
+            <div id="chat-history-list">
+                <!-- Chat history items will be dynamically added here -->
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar" id="user-avatar">
+                    <!-- User initials will be added dynamically -->
                 </div>
-                <div class="sample-question" onclick="selectSampleQuestion(this)">
-                    Can you recommend a portfolio for long-term?
+                <div class="user-name" id="user-name">
+                    <!-- User name will be added dynamically -->
                 </div>
-                <div class="sample-question" onclick="selectSampleQuestion(this)">
-                    What are the best mutual funds for beginners?
-                </div>
-                <div class="sample-question" onclick="selectSampleQuestion(this)">
-                    How should I allocate my retirement portfolio?
-                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </div>
     </div>
     
-    <div class="typing-indicator hidden" id="typing-indicator">
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-    </div>
+    <!-- Mobile overlay -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
     
-    <div class="input-area">
-        <div class="input-container">
-            <textarea id="user-input" placeholder="Ask about investments..." rows="1"></textarea>
-            <button id="send-button">Send</button>
+    <!-- Main content -->
+    <div class="main-content">
+        <div class="header">
+            <button class="menu-toggle" id="menu-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <div class="app-title">VESTORA
+                    <span class="pill light-grey">Pre-Alpha</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-container" id="chat-container">
+            <div class="welcome-container" id="welcome-screen">
+                <h1 class="welcome-title">Hi, I'm Vestora.</h1>
+                <p class="welcome-subtitle">Your AI-powered investment guide—smart, reliable, and always here for you.</p>
+                
+                <div class="sample-questions">
+                    <div class="sample-question" onclick="selectSampleQuestion(this)">
+                        What is dollar-cost averaging?
+                    </div>
+                    <div class="sample-question" onclick="selectSampleQuestion(this)">
+                        Can you recommend a portfolio for long-term?
+                    </div>
+                    <div class="sample-question" onclick="selectSampleQuestion(this)">
+                        What are the best mutual funds for beginners?
+                    </div>
+                    <div class="sample-question" onclick="selectSampleQuestion(this)">
+                        How should I allocate my retirement portfolio?
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="typing-indicator hidden" id="typing-indicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+        
+        <div class="input-area">
+            <div class="input-container">
+                <textarea id="user-input" placeholder="Ask about investments..." rows="1"></textarea>
+                <button id="send-button">Send</button>
+            </div>
         </div>
     </div>
 
@@ -374,7 +558,176 @@
         const chatContainer = document.getElementById('chat-container');
         const typingIndicator = document.getElementById('typing-indicator');
         const welcomeScreen = document.getElementById('welcome-screen');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const chatHistoryList = document.getElementById('chat-history-list');
+        const userAvatar = document.getElementById('user-avatar');
+        const userName = document.getElementById('user-name');
         const converter = new showdown.Converter({tables: true});
+        
+        // Check if user is logged in
+        let isLoggedIn = false; // This will be set based on server response
+        let currentChatId = null;
+        let chats = [];
+        
+        // Function to toggle sidebar
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        // Check login status on page load
+        window.addEventListener('DOMContentLoaded', checkLoginStatus);
+        
+        function checkLoginStatus() {
+            fetch('/api/user/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.logged_in) {
+                        isLoggedIn = true;
+                        updateUserInfo(data.user);
+                        loadChatHistory();
+                    } else {
+                        // Redirect to login page if not logged in
+                        window.location.href = '/login.html';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                });
+        }
+        
+        function updateUserInfo(user) {
+            if (user && user.name) {
+                // Set user initials in avatar
+                const initials = user.name.split(' ')
+                    .map(n => n[0])
+                    .slice(0, 2)
+                    .join('')
+                    .toUpperCase();
+                
+                userAvatar.textContent = initials;
+                userName.textContent = user.name;
+            }
+        }
+        
+        function loadChatHistory() {
+            fetch('/api/chats')
+                .then(response => response.json())
+                .then(data => {
+                    chats = data.chats || [];
+                    renderChatHistory();
+                })
+                .catch(error => {
+                    console.error('Error loading chat history:', error);
+                });
+        }
+        
+        function renderChatHistory() {
+            chatHistoryList.innerHTML = '';
+            
+            if (chats.length === 0) {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.textContent = 'No recent chats';
+                chatHistoryList.appendChild(emptyState);
+                return;
+            }
+            
+            chats.forEach(chat => {
+                const chatItem = document.createElement('div');
+                chatItem.className = 'chat-item';
+                if (chat.id === currentChatId) {
+                    chatItem.classList.add('active');
+                }
+                
+                chatItem.innerHTML = `
+                    <i class="fas fa-comment chat-icon"></i>
+                    <span>${chat.title || 'New conversation'}</span>
+                `;
+                
+                chatItem.onclick = () => loadChat(chat.id);
+                chatHistoryList.appendChild(chatItem);
+            });
+        }
+        
+        function loadChat(chatId) {
+            currentChatId = chatId;
+            
+            // Clear current chat
+            welcomeScreen.classList.add('hidden');
+            clearChat();
+            
+            // Load chat messages
+            fetch(`/api/chats/${chatId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.messages && data.messages.length > 0) {
+                        data.messages.forEach(msg => {
+                            if (msg.role === 'user') {
+                                addMessage(msg.content, 'user');
+                            } else if (msg.role === 'assistant') {
+                                addMessage(msg.content, 'bot');
+                            }
+                        });
+                    }
+                    
+                    // Update UI to show this is the active chat
+                    renderChatHistory();
+                })
+                .catch(error => {
+                    console.error('Error loading chat:', error);
+                });
+                
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        }
+        
+        function startNewChat() {
+            currentChatId = null;
+            clearChat();
+            welcomeScreen.classList.remove('hidden');
+            
+            // Create new chat on server
+            fetch('/api/chats', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title: 'New conversation' }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    currentChatId = data.id;
+                    loadChatHistory();
+                })
+                .catch(error => {
+                    console.error('Error creating new chat:', error);
+                });
+                
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        }
+        
+        function clearChat() {
+            // Remove all messages except welcome screen
+            const messages = chatContainer.querySelectorAll('.message');
+            messages.forEach(msg => msg.remove());
+        }
+        
+        function logout() {
+            fetch('/logout')
+                .then(() => {
+                    window.location.href = '/login.html';
+                })
+                .catch(error => {
+                    console.error('Error logging out:', error);
+                });
+        }
         
         // Auto resize textarea
         userInput.addEventListener('input', function() {
@@ -402,6 +755,29 @@
             const message = userInput.value.trim();
             if (!message) return;
             
+            // Create new chat if none exists
+            if (!currentChatId) {
+                fetch('/api/chats', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title: 'New conversation' }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    currentChatId = data.id;
+                    sendMessageToChat(message);
+                })
+                .catch(error => {
+                    console.error('Error creating new chat:', error);
+                });
+            } else {
+                sendMessageToChat(message);
+            }
+        }
+        
+        function sendMessageToChat(message) {
             // Clear welcome screen if still present
             if (!welcomeScreen.classList.contains('hidden')) {
                 welcomeScreen.classList.add('hidden');
@@ -418,85 +794,111 @@
             userInput.disabled = true;
             sendButton.disabled = true;
             
+            // Show typing indicator
+            typingIndicator.classList.remove('hidden');
+            chatContainer.appendChild(typingIndicator);
+            
             // Send message to backend
             fetchResponse(message);
         }
         
+        // Function to add message to chat
         function addMessage(content, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}-message`;
             
-            if (sender === 'user') {
-                messageDiv.textContent = content;
-            } else {
+            if (sender === 'bot') {
                 // Convert markdown to HTML for bot messages
                 messageDiv.innerHTML = converter.makeHtml(content);
+            } else {
+                messageDiv.textContent = content;
             }
             
             chatContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
         
-        async function fetchResponse(message) {
-            try {
-                // Show typing indicator
-                typingIndicator.classList.remove('hidden');
-                chatContainer.appendChild(typingIndicator);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-                
-                // Send message to Flask backend
-                const response = await fetch('/api/advisor', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message: message }),
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Server responded with status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
+        // Function to fetch response from server
+        function fetchResponse(message) {
+            fetch('/api/advisor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    chat_id: currentChatId
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
                 // Hide typing indicator
                 typingIndicator.classList.add('hidden');
                 
-                // Add bot message
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message bot-message';
-                messageDiv.innerHTML = converter.makeHtml(data.response);
+                // Add bot message to chat
+                addMessage(data.response, 'bot');
                 
-                // If there's a chart image, add it
+                // Display chart if available
                 if (data.has_portfolio && data.chart_image) {
                     const chartContainer = document.createElement('div');
                     chartContainer.className = 'chart-container';
-                    const img = document.createElement('img');
-                    img.src = `data:image/png;base64,${data.chart_image}`;
-                    img.style.width = '100%';
-                    chartContainer.appendChild(img);
-                    messageDiv.appendChild(chartContainer);
+                    
+                    const chartImg = document.createElement('img');
+                    chartImg.src = `data:image/png;base64,${data.chart_image}`;
+                    chartImg.alt = 'Portfolio Chart';
+                    chartImg.style.width = '100%';
+                    
+                    chartContainer.appendChild(chartImg);
+                    chatContainer.appendChild(chartContainer);
                 }
                 
-                chatContainer.appendChild(messageDiv);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+                // Update chat title if it's the first message
+                if (chats.find(chat => chat.id === currentChatId)?.title === 'New conversation') {
+                    updateChatTitle(message);
+                }
                 
-            } catch (error) {
-                console.error('Error:', error);
-                typingIndicator.classList.add('hidden');
-                addMessage("Sorry, I encountered an error while processing your request. Please try again.", 'bot');
-            } finally {
                 // Re-enable input
                 userInput.disabled = false;
                 sendButton.disabled = false;
                 userInput.focus();
-            }
+            })
+            .catch(error => {
+                console.error('Error getting advisor response:', error);
+                
+                // Hide typing indicator
+                typingIndicator.classList.add('hidden');
+                
+                // Show error message
+                addMessage('Sorry, there was an error processing your request. Please try again.', 'bot');
+                
+                // Re-enable input
+                userInput.disabled = false;
+                sendButton.disabled = false;
+            });
         }
         
-        // Initialize
-        window.onload = function() {
-            userInput.focus();
-        };
+        // Function to update chat title
+        function updateChatTitle(message) {
+            // Use first few words of first message as title
+            const title = message.split(' ').slice(0, 4).join(' ') + '...';
+            
+            fetch(`/api/chats/${currentChatId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title: title }),
+            })
+            .then(response => response.json())
+            .then(() => {
+                loadChatHistory(); // Refresh chat list
+            })
+            .catch(error => {
+                console.error('Error updating chat title:', error);
+            });
+        }
     </script>
 </body>
 </html>
