@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestora - Your AI Investment Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1e1e2d;
+            --card-bg: #252536;
+            --text-color: #e6e6e6;
+            --text-secondary: #a0a0b8;
+            --accent-color: #9370DB;
+            --accent-hover: #8a5cf7;
+            --border-color: #32324d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1375px; /* Increased from 900px (2.5x scale) */
+            height: 850px; /* Increased from 550px (2.5x scale) */
+            background-color: var(--card-bg);
+            border-radius: 24px; /* Increased from 16px */
+            overflow: hidden;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.2); /* Increased shadow */
+        }
+        
+        .showcase {
+            flex: 1;
+            background: linear-gradient(145deg, #2b2b45, #1a1a2e);
+            padding: 4rem; /* Increased from 2.5rem */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase::before {
+            content: "";
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(rgba(147, 112, 219, 0.15), transparent 70%);
+        }
+        
+        .showcase::after {
+            content: "";
+            position: absolute;
+            bottom: -75px;
+            left: -75px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(rgba(147, 112, 219, 0.1), transparent 70%);
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem; /* Increased from 2rem */
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-family: "Audiowide", sans-serif;
+            font-size: 3rem; /* Increased from 2rem */
+            color: var(--accent-color);
+            letter-spacing: 1.5px;
+        }
+        
+        .tag {
+            font-size: 0.85rem; /* Increased from 0.65rem */
+            background-color: rgba(147, 112, 219, 0.2);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 16px;
+            margin-left: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .headline {
+            font-size: 3.5rem; /* Increased from 2.2rem */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subheadline {
+            color: var(--text-secondary);
+            font-size: 1.5rem; /* Increased from 1rem */
+            line-height: 1.5;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-list {
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem; /* Increased from 1rem */
+        }
+        
+        .feature-icon {
+            width: 36px; /* Increased from 24px */
+            height: 36px; /* Increased from 24px */
+            margin-right: 18px;
+            color: var(--accent-color);
+        }
+        
+        .feature-text {
+            color: var(--text-secondary);
+            font-size: 1.25rem; /* Increased from 0.9rem */
+        }
+        
+        .auth {
+            flex: 1;
+            padding: 4rem; /* Increased from 2.5rem */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Added to center text content */
+        }
+        
+        .auth-header {
+            margin-bottom: 4rem; /* Increased from 2.5rem */
+            text-align: center;
+            width: 100%; /* Added to ensure full width */
+            margin-top: 10rem;
+        }
+        
+        .auth-title {
+            font-size: 2.75rem; /* Increased from 1.75rem */
+            font-weight: 600;
+            margin-bottom: 1.25rem; /* Increased from 0.75rem */
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.5rem; /* Increased from 1rem */
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 4.5rem; /* Increased from 3rem */
+            width: 100%; /* Added to ensure full width */
+        }
+        
+        .btn {
+            width: 100%;
+            max-width: 450px; /* Increased from 300px */
+            padding: 1.25rem; /* Increased from 0.85rem */
+            border-radius: 12px; /* Increased from 8px */
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; /* Increased from 10px */
+            border: none;
+        }
+        
+        .btn-google {
+            background-color: white;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            font-size: 1.5rem; /* Increased from 1rem */
+        }
+        
+        .btn-google:hover {
+            background-color: #f5f5f5;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .btn-google:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-google::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-google:hover::before {
+            left: 100%;
+            animation: shine 1.5s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+                opacity: 0.6;
+            }
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+        
+        .google-icon {
+            transition: transform 0.5s ease;
+            width: 30px; /* Increased from 20px */
+            height: 30px; /* Increased from 20px */
+        }
+        
+        .btn-google:hover .google-icon {
+            transform: rotate(360deg);
+        }
+        
+        /* Loading animation for Google button */
+        .loading-dots {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            height: 36px; /* Increased from 24px */
+        }
+        
+        .loading-dots span {
+            display: inline-block;
+            width: 9px; /* Increased from 6px */
+            height: 9px; /* Increased from 6px */
+            border-radius: 50%;
+            background-color: #333;
+            margin: 0 3px;
+            animation: dots 1.4s infinite ease-in-out both;
+        }
+        
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+            background-color: #4285F4;
+        }
+        
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+            background-color: #34A853;
+        }
+        
+        .loading-dots span:nth-child(3) {
+            background-color: #FBBC05;
+        }
+        
+        .loading-dots span:nth-child(4) {
+            animation-delay: 0.16s;
+            background-color: #EA4335;
+        }
+        
+        @keyframes dots {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .btn-google-content {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Increased from 10px */
+        }
+        .login-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem; /* Increased from 0.5rem */
+            text-decoration: none !important;
+        }
+        
+        .auth-footer {
+            margin-top: auto;
+            font-size: 1.2rem; /* Increased from 0.8rem */
+            color: var(--text-secondary);
+            text-align: center;
+            width: 100%; /* Added to ensure full width */
+        }
+        
+        .auth-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                max-width: 90%;
+            }
+            
+            .showcase {
+                padding: 3rem;
+                max-height: 400px; /* Increased from 250px */
+            }
+            
+            .headline {
+                font-size: 2.8rem;
+            }
+            
+            .auth {
+                padding: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="showcase">
+            <div class="brand">
+                <div class="logo">VESTORA</div>
+                <span class="tag">Pre-Alpha</span>
+            </div>
+            
+            <h1 class="headline">Intelligent investing powered by AI</h1>
+            <p class="subheadline">Make smarter investment decisions with our AI-powered analysis and recommendations</p>
+            
+            <div class="feature-list">
+                <div class="feature">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 14C17.1046 14 18 13.1046 18 12C18 10.8954 17.1046 10 16 10C14.8954 10 14 10.8954 14 12C14 13.1046 14.8954 14 16 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 14H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="feature-text">Smart portfolio analysis and optimization</span>
+                </div>
+                
+                <div class="feature">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 6L13.5 15.5L8.5 10.5L1 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 6H23V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="feature-text">Personalized investment recommendations</span>
+                </div>
+                
+                <div class="feature">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="feature-text">Real-time market insights and alerts</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth">
+            <div class="auth-header">
+                <h2 class="auth-title">Welcome to Vestora</h2>
+                <p class="auth-subtitle">Join thousands of investors making smarter decisions</p>
+            </div>
+            
+            <div class="login-container">
+                <a href="/login" class="login-button">
+                <button class="btn btn-google" onclick="simulateGoogleLogin(this)">
+                    <div class="btn-google-content">
+                        <svg class="google-icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </div>
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                </a>
+            </div>
+            
+            <div class="auth-footer">
+                By continuing, you agree to Vestora's <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function simulateGoogleLogin(button) {
+            // Get button content and loading dots
+            const btnContent = button.querySelector('.btn-google-content');
+            const loadingDots = button.querySelector('.loading-dots');
+            
+            // Show loading animation
+            btnContent.style.display = 'none';
+            loadingDots.style.display = 'flex';
+            
+            // Add a "processing" effect to the button
+            button.style.backgroundColor = '#f1f1f1';
+            button.style.pointerEvents = 'none';
+            
+            // Simulate login process (replace with actual Google OAuth integration)
+            setTimeout(() => {
+                // Reset button state
+                btnContent.style.display = 'flex';
+                loadingDots.style.display = 'none';
+                button.style.backgroundColor = 'white';
+                button.style.pointerEvents = 'auto';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
