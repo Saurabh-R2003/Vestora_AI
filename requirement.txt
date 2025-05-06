@@ -1,5 +1,7 @@
-flask
-flask-cors
+Flask
+flask-login
+Authlib
 matplotlib
 groq
-flask-login
+flask-cors
+gunicorn
