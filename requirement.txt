@@ -2,3 +2,4 @@ flask
 flask-cors
 matplotlib
 groq
+flask-login
