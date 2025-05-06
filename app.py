@@ -153,7 +153,7 @@ def login_page():
 def login():
     nonce = secrets.token_urlsafe(16)
     session['nonce'] = nonce
-    redirect_uri = url_for('authorize', _external=True)
+    redirect_uri = url_for('authorize', _external=True, _scheme="https")
     return google.authorize_redirect(redirect_uri, nonce=nonce)
 
 @app.route('/authorize')
