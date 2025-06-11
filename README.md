@@ -1,39 +1,42 @@
-📊 Vestora – AI-Powered Investment Advisor (Pre-Alpha)
-Vestora is a smart web app that provides investment guidance using AI. From portfolio suggestions to mutual fund recommendations, it delivers concise, professional, and compliant financial insights — powered by LLaMA 3 via Groq.
+# 📈 Vestora – Your AI-Powered Investment Advisor (Pre-Alpha)
 
-🚀 Features
-🔐 Google login with session-based chat history
+**Vestora** is an intelligent, AI-powered financial advisor web app designed to assist users in making informed investment decisions with personalized insights, portfolio splits, and fund recommendations — all powered by advanced language models.
 
-💬 AI advisor chat interface with clean UX
+---
 
-📊 Auto-generated portfolio charts
+## 🔍 Key Features
 
-🧠 Structured, compliance-focused prompts
+- 🔐 **Google OAuth Login**: Seamless and secure authentication with Google.
+- 💬 **AI Chat Interface**: Chat with Vestora to get advice on investments, funds, and market concepts.
+- 🧠 **Institutional-Grade Prompting**: Strict system rules ensure focused, compliance-oriented advice (no fluff, no assumptions).
+- 📁 **Session-Based Chat Memory**: Recent conversations are stored for up to 7 days.
+- 🖼️ **Modern UI**: Sleek and responsive frontend with sidebar navigation, animated interactions, and dark theme.
+- 🔒 **User-Specific Chats**: Your data and conversations are scoped to your login session.
+- 🌐 **Fully Flask-Based Backend**: Powered by Flask, Flask-Login, Authlib, and Groq API integration.
 
-🌙 Modern dark-themed UI with sidebar
+---
 
-⚙️ Tech Stack
-Frontend: HTML, CSS, JavaScript
+## 💡 How It Works
 
-Backend: Python (Flask, Authlib, Flask-Login)
+1. **Login** using Google authentication.
+2. Start a new conversation and ask questions like:
+   - "What is SIP?"
+   - "Can you recommend a portfolio for a conservative investor?"
+3. **Vestora responds** with direct, compliant financial insights — and charts if applicable.
 
-AI: Groq (LLaMA 3–70B)
+---
 
-Charts: Matplotlib
+## ⚙️ Tech Stack
 
-🛠️ Getting Started
-bash
-Copy
-Edit
-git clone https://github.com/your-username/Vestora_AI.git
-cd Vestora_AI
-pip install -r requirements.txt
-Create a .env file with your keys, then run:
+- **Frontend**: HTML5, CSS3, JavaScript  
+- **Backend**: Python (Flask, Flask-Login, Authlib, Groq SDK)  
+- **Auth**: Google OAuth 2.0  
+- **Visualization**: Matplotlib (for pie charts)  
+- **APIs**: Groq (LLaMA 3–70B Model)  
+- **Session Management**: Flask session + local chat memory (7-day retention)
 
-bash
-Copy
-Edit
-flask run
-🧪 Status: Pre-Alpha
-Actively being developed. Feedback welcome!
+---
 
+## 🧪 Status
+
+**Pre-Alpha** – Actively in development. Feedback and contributions welcome!
