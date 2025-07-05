@@ -38,8 +38,8 @@ login_manager.login_view = '/login.html'
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    client_id='841946854683-t28sfb0s2b15vqkgsn88rd99vf22ohft.apps.googleusercontent.com',
-    client_secret='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',
+    client_id=os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     client_kwargs={'scope': 'openid email profile'},
@@ -56,7 +56,7 @@ class User(UserMixin):
 
 # Initialize Groq client
 client = Groq(
-    api_key="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"
+    api_key=os.getenv("GROQ_API")
 )
 
 # System Prompt for Investment Advisor
