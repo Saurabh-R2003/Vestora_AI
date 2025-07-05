@@ -6,3 +6,4 @@ groq
 flask-cors
 gunicorn
 requests
+python-dotenv

@@ -14,6 +14,8 @@ from io import BytesIO
 from groq import Groq
 from flask_cors import CORS
 import secrets
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # Initialize Flask app
@@ -35,27 +37,17 @@ login_manager.init_app(app)
 login_manager.login_view = '/login.html'
 
 # OAuth config
-# oauth = OAuth(app)
-# google = oauth.register(
-#     name='google',
-#     client_id=os.getenv("GOOGLE_CLIENT_ID"),
-#     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
-#     access_token_url='https://oauth2.googleapis.com/token',
-#     authorize_url='https://accounts.google.com/o/oauth2/auth',
-#     client_kwargs={'scope': 'openid email profile'},
-#     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-# )
 oauth = OAuth(app)
-
 google = oauth.register(
     name='google',
     client_id=os.getenv("GOOGLE_CLIENT_ID"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    access_token_url='https://oauth2.googleapis.com/token',
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    client_kwargs={'scope': 'openid email profile'},
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={
-        'scope': 'openid email profile'
-    }
 )
+
 
 class User(UserMixin):
     def __init__(self, id_, name=None, email=None, picture=None):
@@ -158,6 +150,7 @@ def login_page():
     if current_user.is_authenticated:
         return redirect('/')
     return send_from_directory('.', 'login.html')
+
 
 @app.route('/login')
 def login():
